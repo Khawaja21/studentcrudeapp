@@ -55,6 +55,17 @@ function deleteStudent(index) {
 }
 
 function editStudent(index) {
+    fetch(`/students/${index}`, {
+        method: 'Edit',
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        loadStudents();
+    });
+}
+
+function editStudent(index) {
     const nameInput = document.getElementById('studentName');
     const ageInput = document.getElementById('studentAge');
 
@@ -63,4 +74,8 @@ function editStudent(index) {
 
     nameInput.value = selectedStudent[0];
     ageInput.value = selectedStudent[1].split(' ')[0];
+}
+
+function clearForm() {
+    document.getElementById('studentForm').reset();
 }
