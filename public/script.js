@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     loadStudents();
 });
 
@@ -54,16 +54,16 @@ function deleteStudent(index) {
     });
 }
 
-function editStudent(index) {
-    fetch(`/students/${index}`, {
-        method: 'Edit',
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data.message);
-        loadStudents();
-    });
-}
+// function editStudent(index) {
+//     fetch(`/students/${index}`, {
+//         method: 'Edit',
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data.message);
+//         loadStudents();
+//     });
+// }
 
 function editStudent(index) {
     const nameInput = document.getElementById('studentName');
@@ -74,8 +74,46 @@ function editStudent(index) {
 
     nameInput.value = selectedStudent[0];
     ageInput.value = selectedStudent[1].split(' ')[0];
+
+   // Store the index of the edited student in a hidden field
+    document.getElementById('editIndex').value = index;
 }
 
 function clearForm() {
-    document.getElementById('studentForm').reset();
+    const nameInput = document.getElementById('studentName');
+    const ageInput = document.getElementById('studentAge');
+
+    // Check if the elements exist before trying to access them
+    if (nameInput && ageInput) {
+        nameInput.value = '';
+        ageInput.value = '';
+    } else {
+        console.error('One or both form elements are null or not found.');
+    }
+}
+
+//Function to update an edited student
+function updateStudent() {
+    const nameInput = document.getElementById('studentName');
+    const ageInput = document.getElementById('studentAge');
+    const editIndex = document.getElementById('editIndex').value;
+
+    const updatedStudent = {
+        name: nameInput.value,
+        age: ageInput.value
+    };
+
+    fetch(`/students/${editIndex}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedStudent),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.message);
+        loadStudents();
+        clearForm();
+    });
 }
