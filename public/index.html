@@ -13,13 +13,16 @@
             <!-- Input fields for student information -->
             <input type="text" id="studentName" placeholder="Student Name" required>
             <input type="number" id="studentAge" placeholder="Student Age" required>
+            <input type="hidden" id="editIndex" name="editIndex">
             <button type="button" onclick="addStudent()">Add Student</button>
+            <button type="button" onclick="updateStudent()">Update Student</button>
+            
         </form>
 
         <!-- Display the list of students -->
         <ul id="studentList"></ul>
     </div>
 
-    <script src="script.js"></script>
 </body>
 </html>
+<script src="script.js"></script>
