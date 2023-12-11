@@ -9,6 +9,19 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
+// Set up Content Security Policy middleware
+app.use((req, res, next) => {
+    res.setHeader(
+        'Content-Security-Policy',
+        "script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules' https://js.stripe.com; object-src 'self'"
+    );
+    next();
+});
+
+res.setHeader('Content-Security-Policy', "script-src 'self' https://js.stripe.com");
+res.setHeader('Content-Security-Policy', "script-src 'self' 'wasm-unsafe-eval' 'inline-speculation-rules'; script-src-elem https://js.stripe.com; object-src 'self'");
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
