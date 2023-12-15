@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Student Management System</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Student Management System</title>
 </head>
 <body>
-    <div id="app">
-        <h1>Student Management System</h1>
-        <form id="studentForm">
-            <!-- Input fields for student information -->
-            <input type="text" id="studentName" placeholder="Student Name" required>
-            <input type="number" id="studentAge" placeholder="Student Age" required>
-            <input type="hidden" id="editIndex" name="editIndex">
-            <button type="button" onclick="addStudent()">Add Student</button>
-            <button type="button" onclick="updateStudent()">Update Student</button>
-            
-        </form>
-
-        <!-- Display the list of students -->
-        <ul id="studentList"></ul>
-    </div>
-
+  <div class="container">
+    <h1>Student Management System</h1>
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="studentTableBody"></tbody>
+    </table>
+    <form id="studentForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Student Name" required>
+      <label for="age">Age:</label>
+      <input type="number" id="age"placeholder="Student Age" required>
+      <input type="hidden" id="editIndex" name="editIndex">
+      <button type="submit">Add Student</button>
+      <button type="button" onclick="updateStudent()">Update Student</button>
+      <!-- <button type="submit">Update Student</button>
+    </form> -->
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
-<script src="script.js"></script>
